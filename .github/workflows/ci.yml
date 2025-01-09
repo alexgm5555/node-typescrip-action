@@ -1,6 +1,8 @@
 name: CI Pipeline to PR
 
 on:
+  push:
+    branches: [ release ]
   pull_request:
     branches: [ main, develop ]
 
