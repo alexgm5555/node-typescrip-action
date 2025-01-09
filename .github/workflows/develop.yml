@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  send-message:
+  deploy-jfrog:
     runs-on: ubuntu-latest
 
     steps:
