@@ -33,10 +33,3 @@ jobs:
       run: |
         npm run build
         npm pack
-
-    - name: Upload artifact
-      if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-      uses: actions/upload-artifact@v4
-      with:
-        name: package
-        path: "*.tgz"

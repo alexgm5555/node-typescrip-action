@@ -1,4 +1,4 @@
-name: On Merge Workflow
+name: On Merge Workflow deploy jfrog main
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main # Cambia 'main' por la rama destino de tu merge si es diferente
 
 jobs:
-  send-message:
+  deploy-jfrog-main:
     runs-on: ubuntu-latest
 
     steps:
