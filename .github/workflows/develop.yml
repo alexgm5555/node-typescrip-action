@@ -1,20 +1,22 @@
-name: On Merge Workflow to develop
+name: On Merge to Develop Workflow
 
 on:
   push:
     branches:
-      - develop
+      - develop  # Esta es la rama develop, cambia si tu rama se llama de otra manera
 
 jobs:
   deploy-jfrog:
     runs-on: ubuntu-latest
 
     steps:
+      # Paso para hacer checkout del código
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: deploy jfrog
+      # Paso para enviar el mensaje a un servidor
+      - name: Send message to server (example)
         run: |
           curl -X POST https://httpbin.org/post \
           -H "Content-Type: application/json" \
-          -d '{"message": "Se envio tgz a jfrog"}'
+          -d '{"message": "Merge realizado exitosamente en la rama develop"}'
