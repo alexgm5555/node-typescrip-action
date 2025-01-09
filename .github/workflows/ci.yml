@@ -1,6 +1,8 @@
 name: CI Pipeline to PR
 
 on:
+  push:
+    branches: [ release ]
   pull_request:
     branches: [ main, develop ]
 
@@ -29,7 +31,6 @@ jobs:
       run: npm run lint
 
     - name: Build package
-      if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
       run: |
         npm run build
         npm pack
