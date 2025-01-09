@@ -3,16 +3,9 @@ name: CI Pipeline to PR
 on:
   push:
     branches: 
-      - release
-  pull_request:
-    branches: 
-      - main
-      - develop
-  # Para que también se ejecute si el commit tiene la estructura CI=true
-  # en cualquier rama
-  push:
-    branches: 
       - '**'  # Para capturar todos los commits en cualquier rama
+  pull_request:
+    branches: [ main, develop ]
 
 jobs:
   build:
