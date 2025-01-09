@@ -1,0 +1,20 @@
+name: On Merge Workflow to develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: deploy jfrog
+        run: |
+          curl -X POST https://httpbin.org/post \
+          -H "Content-Type: application/json" \
+          -d '{"message": "Se envio tgz a jfrog"}'
