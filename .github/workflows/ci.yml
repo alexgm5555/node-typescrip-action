@@ -2,70 +2,47 @@ name: CI Pipeline to PR
 
 on:
   push:
-    branches: [ release ]
+    branches: 
+      - release
   pull_request:
-    branches: [ main, develop ]
+    branches: 
+      - main
+      - develop
+  # Para que también se ejecute si el commit tiene la estructura CI=true
+  # en cualquier rama
+  push:
+    branches: 
+      - '**'  # Para capturar todos los commits en cualquier rama
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' && contains(github.event.head_commit.message, 'CI=true') || 
+      github.event_name == 'pull_request' || 
+      github.ref == 'refs/heads/release'
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test
+      - name: Run tests
+        run: npm test
 
-    - name: Run ESLint
-      run: npm run lint
+      - name: Run ESLint
+        run: npm run lint
 
-    - name: Build package
-      run: |
-        npm run build
-        npm pack
-
-on:
-  push:
-    branches:
-      - '**'  # Este flujo se ejecuta en cualquier push a cualquier rama
-
-jobs:
-  ci:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'CI=true')  # Verifica si el mensaje contiene 'CI=true'
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test
-
-    - name: Run ESLint
-      run: npm run lint
-
-    - name: Build package
-      run: |
-        npm run build
-        npm pack
+      - name: Build package
+        run: |
+          npm run build
+          npm pack
