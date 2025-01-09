@@ -4,7 +4,7 @@
     "main": "dist/index.js",
     "types": "module",
     "scripts": {
-      "build": "rollup -c",
+      "build": "rollup -c --bundleConfigAsCjs",
       "test": "jest",
       "lint": "eslint src/**/*.ts",
       "prepare": "npm run build"
