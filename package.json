@@ -2,9 +2,9 @@
     "name": "typescript-project",
     "version": "1.0.0",
     "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "types": "module",
     "scripts": {
-      "build": "rollup -c",
+      "build": "rollup -c --bundleConfigAsCjs",
       "test": "jest",
       "lint": "eslint src/**/*.ts",
       "prepare": "npm run build"
